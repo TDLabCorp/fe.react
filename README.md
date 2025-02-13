@@ -1,3 +1,16 @@
+# fe.react
+
+프론트엔드 보일러블레이트
+
+# 사용라이브러리
+
+- react
+- axios
+- dotenv
+- react-router-dom
+- prop-types
+- zustand
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

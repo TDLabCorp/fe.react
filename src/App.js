@@ -1,24 +1,24 @@
 import React from "react";
-import logo from "./logo.svg";
+
+import { If, Then, Else } from "react-if";
+import { useSession } from "./store/Session";
+
 import "./App.css";
+import { Authed } from "./layout/Authed";
+import { UnAuthed } from "./layout/UnAuthed";
 
 function App() {
+  const isAuthed = useSession((state) => state.isAuthed);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <If condition={isAuthed}>
+        <Then>
+          <Authed />
+        </Then>
+        <Else>
+          <UnAuthed></UnAuthed>
+        </Else>
+      </If>
     </div>
   );
 }
