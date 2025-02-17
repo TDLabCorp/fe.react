@@ -6,8 +6,20 @@ export const useSession = create(
     (set) => ({
       session: null,
       isAuthed: false,
-      signIn: () => {
-        set(() => ({ session: { session_id: "ADFASFDASFA" }, isAuthed: true }));
+      signIn: (data) => {
+        return new Promise((resolve, reject) => {
+          const { user_id, password } = data;
+
+          if (user_id && password) {
+            set(() => ({
+              session: { session_id: "ADFASFDASFA" },
+              isAuthed: true,
+            }));
+            resolve();
+            return;
+          }
+          reject();
+        });
       },
       signOut: () => {
         set(() => ({ session: null, isAuthed: false }));

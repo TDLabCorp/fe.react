@@ -1,25 +1,17 @@
-import React from "react";
+import "./App.scss";
 
-import { If, Then, Else } from "react-if";
-import { useSession } from "./store/Session";
-
-import "./App.css";
-import { Authed } from "./layout/Authed";
-import { UnAuthed } from "./layout/UnAuthed";
+import { BrowserRouter, Route, Routes } from "react-router";
+import { Front } from "./layout/Front";
+import { SignIn } from "./layout/SignIn";
 
 function App() {
-  const isAuthed = useSession((state) => state.isAuthed);
   return (
-    <div className="App">
-      <If condition={isAuthed}>
-        <Then>
-          <Authed />
-        </Then>
-        <Else>
-          <UnAuthed></UnAuthed>
-        </Else>
-      </If>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<Front />}></Route>
+        <Route path="/signIn" element={<SignIn />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
