@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import * as session from "../api/session";
 
 export const useSession = create(
   persist(
@@ -8,17 +9,19 @@ export const useSession = create(
       isAuthed: false,
       signIn: (data) => {
         return new Promise((resolve, reject) => {
-          const { user_id, password } = data;
-
-          if (user_id && password) {
-            set(() => ({
-              session: { session_id: "ADFASFDASFA" },
-              isAuthed: true,
-            }));
-            resolve();
-            return;
-          }
-          reject();
+          session.signIn(data).then(
+            (User) => {
+              console.log(JSON.stringify(User));
+              set(() => ({
+                session: User,
+                isAuthed: true,
+              }));
+              resolve();
+            },
+            (reason) => {
+              reject("로그인에 실패하였습니다.");
+            }
+          );
         });
       },
       signOut: () => {

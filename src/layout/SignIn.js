@@ -28,13 +28,13 @@ export function SignIn() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     signIn(signData)
       .then(() => {
         navigate("/");
       })
       .catch((reason) => {
-        // console.log("catch");
-        setErrorMessage({ toggle: true, message: "로그인에 실패하였습니다." });
+        setErrorMessage({ toggle: true, message: reason });
       });
   }
 
@@ -66,7 +66,7 @@ export function SignIn() {
             >
               <Form.Control
                 size="mb"
-                type="email"
+                type="text"
                 name="user_id"
                 onChange={changeControl}
                 placeholder="Email"
